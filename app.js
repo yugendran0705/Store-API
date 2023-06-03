@@ -2,15 +2,17 @@ require('dotenv').config();
 
 const express = require('express');
 const app = express();
-const errorMiddleware = require('./middleware/error-handler');
-const notFoundMiddleware = require('./middleware/not-found');
+const errorHandlerMiddleware = require('./middleware/error-handler');
+const notFound = require('./middleware/not-found');
+require('express-async-errors');
 const connectDB = require('./db/connect');
+const productsRouter = require('./routes/products');
 
-app.use(errorMiddleware)
 app.use(express.json());
-app.use(notFoundMiddleware)
+app.use(errorHandlerMiddleware)
+app.use(notFound)
 
-app.use('/api/v1/products', require('./routes/products'))
+app.use('/api/v1/products', productsRouter)
 
 
 const port = process.env.PORT || 3000;
