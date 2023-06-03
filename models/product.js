@@ -16,7 +16,7 @@ const productSchema = new Schema({
     },
     rating: {
         type: Number,
-        default: 4.5,
+        default: 4,
     },
     createdAt: {
         type: Date,
