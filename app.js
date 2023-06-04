@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 const express = require('express');
 const app = express();
 const errorHandlerMiddleware = require('./middleware/error-handler');
@@ -9,13 +7,16 @@ const connectDB = require('./db/connect');
 const productsRouter = require('./routes/products');
 
 app.use(express.json());
-app.use(errorHandlerMiddleware)
-app.use(notFound)
+
+require('dotenv').config();
 
 app.use('/api/v1/products', productsRouter)
 
+app.use(errorHandlerMiddleware)
+app.use(notFound)
 
-const port = process.env.PORT || 3000;
+
+const port = process.env.PORT;
 
 const start = async () => {
     try {
